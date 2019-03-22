@@ -1,0 +1,2 @@
+# splendor
+ splendor ai
