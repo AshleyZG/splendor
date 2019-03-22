@@ -10,7 +10,7 @@ class Player(object):
     def __init__(self, arg):
         super(Player, self).__init__()
         self.name = arg['name']
-        self.score = arg['score']
+        self.score = arg.get('score', 0)
 
         # 如果用户当前没有，返回空list
         self.gems = arg.get('gems', [])
@@ -67,9 +67,9 @@ class Player(object):
 
     def afford_develop_card(self, card: DevelopCard):
         '判断用户当前是否能够购买发展卡'
-        cost = card.cost
+        costs = card.costs
         dist = 0
-        for gem in cost:
+        for gem in costs:
             dist += max(0, gem['count'] - self.purchase_power[gem['color']])
         return dist <= self.purchase_power['gold']
 
