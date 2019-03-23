@@ -1,0 +1,304 @@
+{
+  "round": 2,
+  "playerName": "main1",
+  "table": {
+    "gems": [
+      {
+        "color": "red",
+        "count": 5
+      },
+      {
+        "color": "gold",
+        "count": 5
+      },
+      {
+        "color": "green",
+        "count": 5
+      },
+      {
+        "color": "blue",
+        "count": 5
+      },
+      {
+        "color": "white",
+        "count": 5
+      },
+      {
+        "color": "black",
+        "count": 5
+      }
+    ],
+    "cards": [
+      {
+        "level": 3,
+        "score": 3,
+        "color": "green",
+        "costs": [
+          {
+            "color": "white",
+            "count": 5
+          },
+          {
+            "color": "blue",
+            "count": 3
+          },
+          {
+            "color": "red",
+            "count": 3
+          },
+          {
+            "color": "black",
+            "count": 3
+          }
+        ]
+      },
+      {
+        "level": 1,
+        "score": 1,
+        "color": "white",
+        "costs": [
+          {
+            "color": "green",
+            "count": 4
+          }
+        ]
+      },
+      {
+        "level": 1,
+        "color": "blue",
+        "costs": [
+          {
+            "color": "white",
+            "count": 1
+          },
+          {
+            "color": "green",
+            "count": 2
+          },
+          {
+            "color": "red",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "score": 4,
+        "color": "blue",
+        "costs": [
+          {
+            "color": "white",
+            "count": 6
+          },
+          {
+            "color": "blue",
+            "count": 3
+          },
+          {
+            "color": "black",
+            "count": 3
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "score": 2,
+        "color": "black",
+        "costs": [
+          {
+            "color": "blue",
+            "count": 1
+          },
+          {
+            "color": "green",
+            "count": 4
+          },
+          {
+            "color": "red",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "score": 3,
+        "color": "white",
+        "costs": [
+          {
+            "color": "white",
+            "count": 6
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "score": 3,
+        "color": "black",
+        "costs": [
+          {
+            "color": "black",
+            "count": 6
+          }
+        ]
+      },
+      {
+        "level": 1,
+        "color": "white",
+        "costs": [
+          {
+            "color": "blue",
+            "count": 1
+          },
+          {
+            "color": "green",
+            "count": 2
+          },
+          {
+            "color": "red",
+            "count": 1
+          },
+          {
+            "color": "black",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "level": 1,
+        "color": "white",
+        "costs": [
+          {
+            "color": "blue",
+            "count": 2
+          },
+          {
+            "color": "green",
+            "count": 2
+          },
+          {
+            "color": "black",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "score": 2,
+        "color": "white",
+        "costs": [
+          {
+            "color": "red",
+            "count": 5
+          },
+          {
+            "color": "black",
+            "count": 3
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "score": 4,
+        "color": "white",
+        "costs": [
+          {
+            "color": "black",
+            "count": 7
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "score": 5,
+        "color": "white",
+        "costs": [
+          {
+            "color": "white",
+            "count": 3
+          },
+          {
+            "color": "black",
+            "count": 7
+          }
+        ]
+      }
+    ],
+    "nobles": [
+      {
+        "score": 3,
+        "requirements": [
+          {
+            "color": "red",
+            "count": 4
+          },
+          {
+            "color": "green",
+            "count": 4
+          }
+        ]
+      },
+      {
+        "score": 3,
+        "requirements": [
+          {
+            "color": "black",
+            "count": 3
+          },
+          {
+            "color": "red",
+            "count": 3
+          },
+          {
+            "color": "white",
+            "count": 3
+          }
+        ]
+      },
+      {
+        "score": 3,
+        "requirements": [
+          {
+            "color": "green",
+            "count": 3
+          },
+          {
+            "color": "blue",
+            "count": 3
+          },
+          {
+            "color": "white",
+            "count": 3
+          }
+        ]
+      },
+      {
+        "score": 3,
+        "requirements": [
+          {
+            "color": "black",
+            "count": 3
+          },
+          {
+            "color": "blue",
+            "count": 3
+          },
+          {
+            "color": "white",
+            "count": 3
+          }
+        ]
+      }
+    ]
+  },
+  "players": [
+    {
+      "name": "main1"
+    },
+    {
+      "name": "main2"
+    },
+    {
+      "name": "main3"
+    }
+  ]
+}

@@ -8,6 +8,7 @@ class Card(object):
     def __init__(self, arg):
         super(Card, self).__init__()
         # self.arg = arg
+        # self.score_cost_ratio = 0
         pass
 
 
@@ -23,18 +24,14 @@ class DevelopCard(Card):
         self.score = arg.get('score', 0)
         self.color = arg['color']
         self.costs = arg['costs']
+        self.score_cost_ratio = self.score / \
+            sum([gem['count'] for gem in self.costs])
 
     def to_json(self):
         return {'color': self.color,
                 'costs': self.costs,
                 'level': self.level,
                 'score': self.score}
-
-    # def to_json_purchase(self):
-    #     return {'color': self.color,
-    #             'costs': self.costs,
-    #             'level': self.level,
-    #             'score': self.score}
 
 
 class Noble(Card):
@@ -44,3 +41,9 @@ class Noble(Card):
         super(Noble, self).__init__(arg)
         self.score = arg['score']
         self.requirements = arg['requirements']
+        self.score_cost_ratio = self.score / \
+            sum([gem['count'] for gem in self.requirements])
+
+    def to_json(self):
+        return {'requirements': self.requirements,
+                'score': self.score}

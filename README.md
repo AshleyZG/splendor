@@ -1,2 +1,7 @@
 # splendor
- splendor ai
+ splendor ai  
+
+```python
+python3 game.py
+```
+
