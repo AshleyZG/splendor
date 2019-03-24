@@ -26,6 +26,7 @@ class DevelopCard(Card):
         self.costs = arg['costs']
         self.score_cost_ratio = self.score / \
             sum([gem['count'] for gem in self.costs])
+        self.peak = max([item.get('count', 0) for item in self.costs])
 
     def to_json(self):
         return {'color': self.color,

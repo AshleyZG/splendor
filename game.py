@@ -8,6 +8,8 @@ import sys
 from table import Table
 from player import Player
 
+COLORS = ['green', 'white', 'blue', 'black', 'red', 'gold']
+
 
 class Game(object):
     """docstring for Game"""
@@ -25,19 +27,26 @@ class Game(object):
         self.scarcity = self.get_scarcity()
 
     def move(self):
+        # 如果是 round 1，随机选择三个颜色的卡
+        if self.round == 1:
+            return {"get_different_color_gems": random.sample(COLORS, 3)}
         # 如果手上的牌加保留牌大于15， 则开始购买保留牌
+
         'to be finished'
-        # 首先购买保留的卡片
         result = None
 
-        card = self.purchase_card(
+        card_reserved = self.purchase_card(
             self.players[self.player_name].reserved_cards)
-        if card != None:
-            result = {"purchase_reserved_card": card.to_json()}
-        # 尝试购买桌面上的卡片
-        card = self.purchase_card(self.table.cards)
-        if card != None:
-            result = {"purchase_card": card.to_json()}
+        # 首先购买卡片，在purchase 和 reserved 中选择面值最大的
+        card_purchased = self.purchase_card(self.table.cards)
+
+        if card_reserved != None:
+            result = {"purchase_reserved_card": card_reserved.to_json()}
+        if card_purchased != None:
+            result = {"purchase_card": card_purchased.to_json()}
+        if self.players[self.player_name].score >= 12 and:
+            card = card_reserved
+            result = {"purchase_card": card_purchased.to_json()}
         # 如果无法购买，查看是否能够保留
 
         # 既不能购买也不能保留，就拿gem
@@ -51,8 +60,10 @@ class Game(object):
             card = self.reserve_card()
             if card != None:
                 result = {"reserve_card": {"card": card.to_json()}}
+
         if result == None:
             result = candidate
+
         noble = self.check_noble()
         if noble != None:
             result['noble'] = noble.to_json()
@@ -144,13 +155,13 @@ if __name__ == '__main__':
         data = json.loads(sys.argv[1])
 
     game = Game(data)
-    with open('{}.json'.format(game.round), 'w') as fout:
+    with open('{}_{}.json'.format(game.round, game.player_name), 'w') as fout:
         fout.write(json.dumps(data, indent=2))
     move = game.move()
 
     print(json.dumps(move, ensure_ascii=False, indent=2))
 
-    with open('act.txt', 'w' if game.round == 1 else 'a') as fout2:
+    with open('act_{}.txt'.format(game.player_name), 'w' if game.round == 1 else 'a') as fout2:
         fout2.write('round {}'.format(game.round))
         fout2.write('\n')
         fout2.write(json.dumps(move, ensure_ascii=False, indent=2))
