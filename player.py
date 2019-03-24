@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # author: zhangge9194@pku.edu.cn
 # file: player.py
 
@@ -30,6 +31,7 @@ class Player(object):
 
         self.purchase_power = self._set_purchase_power()
         self.noble_power = self._set_noble_power()
+        self.reserved_score = sum([card.score for card in self.reserved_cards])
 
     def token_available(self):
         '判断该用户是否能够拿token'
@@ -84,7 +86,7 @@ class Player(object):
         # print('dist: ', dist)
         return dist <= self.purchase_power['gold']
 
-    def reserve_develop_card(self, card: DevelopCard):
+    def reserve_develop_card(self, card: DevelopCard, bias=0):
         '判断用户当前是否应该保留牌'
         # 如果保留牌已有三张，不行
         # print(card.__dict__)
@@ -99,7 +101,8 @@ class Player(object):
             dist += max(0, gem['count'] - self.purchase_power[gem['color']])
 
         # print(dist)
-        return dist <= self.purchase_power['gold'] + card.level + 1
+        # return dist <= self.purchase_power['gold'] + card.level + 1
+        return dist <= self.purchase_power['gold'] + card.level - bias
 
     def afford_noble(self, card: Noble):
         '判断用户当前能否获得 noble '
@@ -108,3 +111,5 @@ class Player(object):
             if gem['count'] > self.noble_power[gem['color']]:
                 return False
         return True
+
+    # def

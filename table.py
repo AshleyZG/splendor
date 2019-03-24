@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # author: zhangge9194@pku.edu.cn
 # file: table.py
 
@@ -13,9 +14,11 @@ class Table(object):
         self.gems = arg['gems']
         self.cards = []
         self.nobles = []
-        for card in arg['cards']:
+        # for card in arg['cards']:
+        for card in arg.get('cards', []):
             self.cards.append(DevelopCard(card))
-        for noble in arg['nobles']:
+        # for noble in arg['nobles']:
+        for noble in arg.get('nobles', []):
             self.nobles.append(Noble(noble))
         self.upper_bound = self._get_upper_limit()
         # 对卡片按照性价比排序
@@ -33,8 +36,8 @@ class Table(object):
                 bound[cost['color']] = max(bound[cost['color']], cost['count'])
         return bound
 
-    def get_two_same(self, color: str):
+    def get_two_same(self, color):
         return self.gem_count[color] >= 4
 
-    def get_gem(self, color: str):
+    def get_gem(self, color):
         return self.gem_count[color] > 0

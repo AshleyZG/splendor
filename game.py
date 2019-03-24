@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # author: zhangge9194@pku.edu.cn
 # file: game.py
 
@@ -31,7 +32,7 @@ class Game(object):
         if self.round == 1:
             return {"get_different_color_gems": random.sample(COLORS, 3)}
         # 如果手上的牌加保留牌大于15， 则开始购买保留牌
-
+        SCORED = False
         'to be finished'
         result = None
 
@@ -42,11 +43,20 @@ class Game(object):
 
         if card_reserved != None:
             result = {"purchase_reserved_card": card_reserved.to_json()}
+            if card_reserved.score > 0:
+                SCORED = True
         if card_purchased != None:
             result = {"purchase_card": card_purchased.to_json()}
-        if self.players[self.player_name].score >= 12 and:
-            card = card_reserved
-            result = {"purchase_card": card_purchased.to_json()}
+            if card_purchased.score > 0:
+                SCORED = True
+
+        # 如果分数大于12的话，优先购买分数高的卡
+        if self.players[self.player_name].score >= 12 and card_reserved != None and card_purchased != None:
+            if card_reserved.score >= card_purchased.score:
+                result = {"purchase_reserved_card": card_reserved.to_json()}
+            else:
+                result = {"purchase_card": card_purchased.to_json()}
+
         # 如果无法购买，查看是否能够保留
 
         # 既不能购买也不能保留，就拿gem
@@ -58,6 +68,11 @@ class Game(object):
         else:
             candidate = {}
             card = self.reserve_card()
+            if card != None:
+                result = {"reserve_card": {"card": card.to_json()}}
+
+        if not SCORED and candidate == {} and self.players[self.player_name].score + self.players[self.player_name].reserved_score >= 15:
+            card = self.reserve_other_card()
             if card != None:
                 result = {"reserve_card": {"card": card.to_json()}}
 
@@ -75,9 +90,7 @@ class Game(object):
                        for card in self.table.cards + self.players[self.player_name].reserved_cards]
 
         cards_score = sorted(cards_score, key=lambda x: -x[1][0])
-        # for card, _ in cards_score:
 
-        #     self.players[self.player_name].afford_develop_card(card)
         chosen = []
         max_len = min(10 - self.players[self.player_name].gems_count, 3)
         for card in cards_score:
@@ -105,6 +118,17 @@ class Game(object):
         for card in cards:
             if self.players[self.player_name].afford_develop_card(card):
                 return card
+        return None
+
+    def reserve_other_card(self):
+        if not self.players[self.player_name].reserve_available():
+            return None
+        player_names = [name for name in self.players.keys()
+                        if name != self.player_name]
+        for card in self.table.cards:
+            for name in player_names:
+                if self.players[name].reserve_develop_card(card, bias=card.level - 1) and self.players[name].score + card.score >= 15 and card.score > 0:
+                    return card
         return None
 
     def reserve_card(self):

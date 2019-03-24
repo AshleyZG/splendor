@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # author: zhangge9194@pku.edu.cn
 # file: card.py
 
